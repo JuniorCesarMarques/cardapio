@@ -156,7 +156,7 @@ export default function ProductsPage() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                           <DropdownMenuItem>
-                            <Link href={`/edit?id=${product.id}`}>Editar</Link>
+                            <Link href={`/edit/${product.id}`}>Editar</Link>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => handleDelete(product.id, product.name)}>Excluir</DropdownMenuItem>
                         </DropdownMenuContent>

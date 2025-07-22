@@ -3,17 +3,18 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 import { editProductFormSchema } from "@/lib/schemas/editProduct";
 import { supabase } from "@/lib/supabase";
 import { v4 as uuidv4 } from "uuid";
 
 export default function EditProductForm() {
-  const searchParams = useSearchParams();
-  const productId = searchParams.get("id");
 
-  console.log("PRODUCTID:", productId);
+  const params = useParams();
+
+  const productId = params.id;
+
   const router = useRouter();
 
   const [categories, setCategories] = useState<{ id: string; name: string }[]>(
