@@ -3,6 +3,7 @@ import { z } from "zod";
 // FRONTEND: Schema usado com react-hook-form
 export const editProductFormSchema = z.object({
   name: z.string().min(1, "Nome obrigatório"),
+  type: z.string(),
   description: z.string().optional(),
   price: z.string().refine(val => !isNaN(Number(val)), {
     message: "Preço inválido",

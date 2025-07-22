@@ -2,7 +2,9 @@ import { prisma } from "@/utils/connect";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const { id } = await req.json();
+
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id") ?? undefined;
 
   try {
     const product = await prisma.product.findUnique({
@@ -11,6 +13,8 @@ export async function GET(req: NextRequest) {
         category: { select: { name: true } }
       }
     });
+
+    console.log("PRODUTO VINDO DO BACKEND", product)
 
     if (!product) {
       return new NextResponse("Produto não encontrado", { status: 404 });
@@ -31,6 +35,7 @@ export async function PUT(req: NextRequest) {
       where: { id: body.id },
       data: {
         name: body.name,
+        type: body.type,
         description: body.description,
         price: Number(body.price),
         imageUrl: body.imageUrl,

@@ -31,30 +31,29 @@ export default function EditProductForm() {
     resolver: zodResolver(editProductFormSchema),
   });
 
-  console.log("ERRORS", errors);
-
   const imageFile = watch("image");
-
-  console.log("IMAGEFILE", imageFile);
 
   useEffect(() => {
     const fetchCategories = async () => {
       const res = await fetch("/api/categories");
       const data = await res.json();
       setCategories(data);
+
+      console.log("CATEGORIES", data)
     };
 
     const fetchProduct = async () => {
+      console.log("ENTROU NO FETCH")
       if (!productId) return;
-      const res = await fetch(`/api/products/${productId}`);
+      const res = await fetch(`/api/products/id?id=${productId}`);
       const data = await res.json();
 
-      console.log("DATA", data)
+      console.log("DATA", data.category)
       reset({
         name: data.name,
         description: data.description,
-        price: String(data.price),
-        categoryId: data.categoryId,
+        price: data.price,
+        categoryId: data.category.name,
         barcode: data.barcode,
       });
       setPreview(data.imageUrl);
@@ -73,11 +72,8 @@ export default function EditProductForm() {
     }
   }, [imageFile]);
 
-  console.log("COMPONENTE RENDERIZADO");
-  console.log("ISSUBMITING", isSubmitting);
 
   const onSubmit = async (data: any) => {
-    console.log("ENTROU AQUI");
     try {
       let imageUrl = preview;
 
@@ -106,6 +102,7 @@ export default function EditProductForm() {
         body: JSON.stringify({
           id: productId, 
           name: data.name,
+          type: data.type,
           description: data.description,
           price: Number(data.price),
           categoryId: data.categoryId,
@@ -115,7 +112,7 @@ export default function EditProductForm() {
       });
 
       if (!res.ok) throw new Error("Erro ao atualizar produto");
-      router.push("/products");
+      router.push("/");
     } catch (error) {
       console.error(error);
     }
@@ -135,6 +132,19 @@ export default function EditProductForm() {
           {errors.name && (
             <p className="text-red-500 text-sm">{errors.name.message}</p>
           )}
+        </div>
+
+        <div>
+          <label className="block font-medium mb-2">Tipo de embalagem</label>
+          <select id="" {...register("type")} className="border p-2">
+            <option value="">Selecione um tipo de embalagem</option>
+            <option value="unidade">Unidade</option>
+            <option value="caixa">Caixa</option>
+            <option value="pacote">Pacote</option>
+            <option value="quilo">Quilo</option>
+            <option value="litro">Litro</option>
+          </select>
+          {errors.type && <p className="text-red-500 text-sm">{errors.type.message}</p>}
         </div>
 
         <div>
@@ -200,8 +210,8 @@ export default function EditProductForm() {
         <div>
           <label className="block font-medium">Categoria</label>
           <select
-            {...register("categoryId")}
             className="w-full border px-3 py-2 rounded bg-white"
+            {...register("categoryId")}
           >
             <option value="">Selecione uma categoria</option>
             {categories.map((category) => (

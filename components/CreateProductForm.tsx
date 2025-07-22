@@ -85,6 +85,7 @@ export default function CreateProductForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: data.name,
+          type: data.type,
           description: data.description,
           price: Number(data.price),
           categoryId: data.categoryId,
@@ -102,8 +103,6 @@ export default function CreateProductForm() {
     }
   };
 
-  console.log(imageFile);
-
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 border rounded-2xl shadow bg-white">
       <h1 className="text-2xl font-bold mb-6">Cadastrar Produto</h1>
@@ -119,6 +118,19 @@ export default function CreateProductForm() {
           {errors.name && (
             <p className="text-red-500 text-sm">{errors.name.message}</p>
           )}
+        </div>
+
+        <div>
+          <label className="block font-medium mb-2">Tipo de embalagem</label>
+          <select id="" {...register("type")} className="border p-2">
+            <option value="">Selecione um tipo de embalagem</option>
+            <option value="unidade">Unidade</option>
+            <option value="caixa">Caixa</option>
+            <option value="pacote">Pacote</option>
+            <option value="quilo">Quilo</option>
+            <option value="litro">Litro</option>
+          </select>
+          {errors.type && <p className="text-red-500 text-sm">{errors.type.message}</p>}
         </div>
 
         <div>
