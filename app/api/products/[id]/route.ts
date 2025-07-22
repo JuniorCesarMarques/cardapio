@@ -1,10 +1,9 @@
 import { prisma } from "@/utils/connect";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
 
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id") ?? undefined;
+  const {id} = params;
 
   if(!id) {
     return new Response(JSON.stringify({ error: "ID é obrigatório" }), {

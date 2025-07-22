@@ -46,7 +46,7 @@ export default function EditProductForm() {
     const fetchProduct = async () => {
       console.log("ENTROU NO FETCH")
       if (!productId) return;
-      const res = await fetch(`/api/products/id?id=${productId}`);
+      const res = await fetch(`/api/products/${productId}`);
       const data = await res.json();
 
       console.log("DATA", data.category)
