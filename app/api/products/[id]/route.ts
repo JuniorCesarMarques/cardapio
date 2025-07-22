@@ -6,6 +6,12 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id") ?? undefined;
 
+  if(!id) {
+    return new Response(JSON.stringify({ error: "ID é obrigatório" }), {
+      status: 400,
+    });
+  }
+
   try {
     const product = await prisma.product.findUnique({
       where: { id },
