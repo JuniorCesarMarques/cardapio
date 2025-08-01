@@ -4,7 +4,13 @@ import { signIn } from "@/lib/auth"; // importado do seu NextAuth()
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+import { useState } from "react";
+
+import { Eye, EyeOff } from "lucide-react";
+
 export default function LoginForm() {
+
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
     
   async function handleLogin(formData: FormData) {
@@ -32,10 +38,13 @@ export default function LoginForm() {
       <Input
         name="password"
         placeholder="Password"
-        type="password"
+        type={showPassword ? "text" : "password"}
         required
         autoComplete="current-password"
       />
+      <span onClick={() => setShowPassword(!showPassword)}>
+        {showPassword ? <EyeOff /> : <Eye />}
+      </span>
       <Button className="w-full" type="submit">
         Entrar
       </Button>

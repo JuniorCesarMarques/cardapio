@@ -34,7 +34,7 @@ export default async function RootLayout({
             <Toaster
               position="top-right"
               toastOptions={{
-                className: "text-lg font-medium", // você pode usar text-sm, text-lg etc.
+                className: "text-lg font-medium",
               }}
             />
             <div className="min-h-[80vh] bg-zinc-100">{children}</div>

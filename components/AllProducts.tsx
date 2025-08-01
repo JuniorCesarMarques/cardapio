@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Carousel from "@/components/Carousel";
 
+import WButton from "@/components/WButton";
+
 import { Input } from "@/components/ui/input";
 
 import { LucideSearch } from "lucide-react";
@@ -117,7 +119,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <Carousel />
+    <Carousel />
 
     <div className="flex items-center mt-4 ml-4 border w-[50%]">
       <LucideSearch className="ml-2 mr-3 text-primary" size={20} />
@@ -239,6 +241,7 @@ export default function ProductsPage() {
           </>
         )}
       </div>
+      <WButton />
     </>
   );
 }
