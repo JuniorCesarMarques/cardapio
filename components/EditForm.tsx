@@ -85,13 +85,13 @@ export default function EditProductForm() {
         const filePath = `products/${fileName}`;
 
         const { error: uploadError } = await supabase.storage
-          .from("catalogo")
+          .from("tofit")
           .upload(filePath, file);
 
         if (uploadError) throw uploadError;
 
         const { data: publicUrlData } = supabase.storage
-          .from("catalogo")
+          .from("tofit")
           .getPublicUrl(filePath);
 
         imageUrl = publicUrlData.publicUrl;

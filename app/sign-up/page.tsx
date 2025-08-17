@@ -66,13 +66,17 @@ export default function UserProfileForm() {
       const filePath = `stores/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
-        .from("catalogo")
+        .from("tofit")
         .upload(filePath, file);
 
-      if (uploadError) throw uploadError;
+      if (uploadError) {
+    console.error('Erro no upload:', uploadError)
+  } else {
+    console.log('Upload feito:', data)
+  }
 
       const { data: publicUrlData } = supabase.storage
-        .from("catalogo")
+        .from("tofit")
         .getPublicUrl(filePath);
 
       const imageUrl = publicUrlData.publicUrl;
