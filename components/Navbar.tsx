@@ -22,7 +22,7 @@ export default function Navbar() {
   return (
     <nav className="w-full bg-zinc-100 text-white px-4 py-3 flex items-center justify-between shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)]">
       <Link href="/">
-        <img className="w-30" src="/logo.png" alt="" />
+        <span className="text-primary font-bold text-xl">ToFit</span>
       </Link>
 
       <div className="flex gap-4 items-center relative">

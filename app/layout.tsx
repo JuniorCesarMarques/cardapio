@@ -10,8 +10,8 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Jamava",
-  description: "App Jamava",
+  title: "ToFit",
+  description: "App ToFit",
   manifest: "/manifest.json",
   themeColor: "#0a84ff",
   icons: {
